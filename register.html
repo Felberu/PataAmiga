@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PataAmiga - Login / Cadastro</title>
+    <style>
+        /* Importação de Fontes */
+        @import url('https://fonts.googleapis.com/css2?family=Creamy+Soup&display=swap');
+        @import url('https://fonts.cdnfonts.com/css/agrandir');
+
+        /* Variáveis de Cores e Fontes */
+        :root {
+            --pata-primary: #23619b;
+            --pata-secondary: #61a8f1;
+            --pata-background: #f2f2f2;
+            --pata-highlight: #f8f559;
+            --font-primary: 'Creamy Soup', cursive;
+            --font-secondary: 'Agrandir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --text-dark: #333;
+            --text-light: #666;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Reset Básico e Estilos Globais */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        html { 
+            scroll-behavior: smooth; 
+        }
+        
+        body {
+            font-family: var(--font-secondary);
+            background: linear-gradient(135deg, var(--pata-background) 0%, #e8f4f8 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: var(--font-primary); 
+            font-weight: normal; 
+        }
+        
+        a { 
+            text-decoration: none; 
+            color: inherit; 
+        }
+        
+        .pata-gradient { 
+            background: linear-gradient(135deg, var(--pata-primary) 0%, var(--pata-secondary) 100%); 
+        }
+
+        .pata-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .pata-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            box-shadow: 0 10px 30px rgba(35, 97, 155, 0.3);
+        }
+
+        .logo-icon svg {
+            width: 40px;
+            height: 40px;
+            color: white;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-section {
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .form-description {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .google-button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background-color: white;
+            border: 2px solid #e5e7eb;
+            color: #374151;
+            font-weight: 600;
+            padding: 16px 24px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .google-button:hover {
+            background-color: #f9fafb;
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .google-button:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            text-align: center;
+            position: relative;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+        }
+
+        .divider span {
+            background: var(--card-bg);
+            padding: 0 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .login-link {
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .login-link a {
+            font-weight: 600;
+            color: var(--pata-primary);
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: var(--pata-secondary);
+            text-decoration: underline;
+        }
+
+        .terms-section {
+            text-align: center;
+            padding-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            line-height: 1.4;
+        }
+
+        .terms-section a {
+            color: var(--pata-primary);
+            text-decoration: underline;
+        }
+
+        .terms-section a:hover {
+            color: var(--pata-secondary);
+        }
+
+        .benefits-list {
+            background: rgba(var(--pata-primary), 0.05);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .benefits-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--pata-primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .benefits-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .benefits-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .check-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--pata-primary);
+            flex-shrink: 0;
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-box {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 1rem;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .pata-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container" style="background-color: rgb(95, 168, 241);">
+        <div class="login-box">
+            
+            <!-- Logo e Título -->
+            <div class="logo-section">
+                <a href="./index.html">
+                    <div>
+                        <img src="./Imagens/LogoWhite.png" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                        </svg>
+                    </div>
+                </a>
+                <p class="subtitle" style="color: #f8f559;">Faça login para acessar sua conta e cuidar melhor do seu pet</p>
+            </div>
+
+            <!-- Formulário de Login -->
+            <div class="pata-card">
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    
+                    <!-- Seção do Google Login -->
+                    <div class="form-section">
+                        <p class="form-description">
+                            <strong>Acesso rápido e seguro</strong><br>
+                            Use sua conta do Google para entrar de forma simples e protegida
+                        </p>
+                        
+                        <button type="button" class="google-button" onclick="handleGoogleLogin()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22.5 12.5c0-.8-.1-1.6-.2-2.3H12v4.5h5.9a5.1 5.1 0 0 1-2.2 3.4v2.9h3.7c2.2-2 3.4-5 3.4-8.5z"/>
+                                <path d="M12 22.5c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.1-4.2 1.1-3.2 0-5.9-2.2-6.9-5.1H1.5v2.9A9 9 0 0 0 12 22.5z"/>
+                                <path d="M5.1 14.8a5.4 5.4 0 0 1 0-5.6V6.3H1.5a9 9 0 0 0 0 11.4l3.6-2.9z"/>
+                                <path d="M12 5.1c1.7 0 3.3.6 4.5 1.8l3.3-3.3C17.9 1.9 15.2 0 12 0A9 9 0 0 0 1.5 6.3l3.6 2.9c1-2.9 3.7-5.1 6.9-5.1z"/>
+                            </svg>
+                            Entrar com Google
+                        </button>
+                    </div>
+
+                    <!-- Divisor -->
+                    <div class="divider">
+                        <span>ou</span>
+                    </div>
+                    
+                    <!-- Link para Cadastro -->
+                    <div class="login-link">
+                        <p>
+                            Ainda não tem uma conta?
+                            <a href="#" onclick="handleRegister()">Crie uma conta gratuita</a>
+                        </p>
+                    </div>
+
+                    <!-- Benefícios -->
+                    <div class="benefits-list">
+                        <div class="benefits-title">Benefícios da sua conta PataAmiga:</div>
+                        
+                        <div class="benefits-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            <span>Agendamento rápido e fácil</span>
+                        </div>
+                        
+                        <div class="benefits-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            <span>Histórico completo do seu pet</span>
+                        </div>
+                        
+                        <div class="benefits-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            <span>Ofertas e promoções exclusivas</span>
+                        </div>
+                        
+                        <div class="benefits-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            <span>Lembretes automáticos de consultas</span>
+                        </div>
+                    </div>
+
+                    <!-- Termos -->
+                    <div class="terms-section">
+                        <p>
+                            Ao entrar, você concorda com nossos 
+                            <a href="#">Termos de Serviço</a> e 
+                            <a href="#">Política de Privacidade</a>
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function handleGoogleLogin() {
+            // Em um site real, esta função redirecionaria para a autenticação do Google
+            alert('Em um site real, esta função redirecionaria para a autenticação segura do Google.');
+            
+            // Simular redirecionamento após login bem-sucedido
+            setTimeout(() => {
+                window.location.href = './index.html';
+            }, 2000);
+        }
+
+        function handleRegister() {
+            // Mesma função para registro, já que usamos Google OAuth
+            handleGoogleLogin();
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            handleGoogleLogin();
+        }
+
+        // Adicionar efeitos visuais ao botão
+        document.querySelector('.google-button').addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+
+        document.querySelector('.google-button').addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    </script>
+
+</body>
+</html>

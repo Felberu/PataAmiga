@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="./Imagens/Icone.png" type="image/png">
+    <title>Sobre Nós - PataAmiga</title>
+   <style>
+        /* Importação de Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Creamy+Soup&display=swap');
+@import url('https://fonts.cdnfonts.com/css/agrandir');
+
+/* Variáveis de Cores e Fontes */
+:root {
+    --pata-primary: #23619b;
+    --pata-secondary: #61a8f1;
+    --pata-background: #f2f2f2;
+    --pata-highlight: #f8f559;
+    --font-primary: 'Creamy Soup', cursive;
+    --font-secondary: 'Agrandir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --text-dark: #333;
+    --text-light: #666;
+    --card-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* Reset Básico e Estilos Globais */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--font-secondary);
+    background-color: var(--pata-background);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-primary); font-weight: normal; }
+a { text-decoration: none; color: inherit; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 5rem 0; }
+.text-center { text-align: center; }
+
+/* Classes Utilitárias e de Componentes */
+.pata-gradient { background: linear-gradient(135deg, var(--pata-primary) 0%, var(--pata-secondary) 100%); }
+.pata-button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 28px; border-radius: 9999px; font-weight: 600; font-size: 1rem;
+    color: white; background: linear-gradient(135deg, #23619b 0%, #61a8f1 100%);
+    transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(35, 97, 155, 0.2);
+    border: none; cursor: pointer;
+}
+.pata-button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(35, 97, 155, 0.3); }
+.pata-card {
+    background: var(--card-bg); backdrop-filter: blur(10px);
+    border: 1px solid rgba(229, 231, 235, 0.8);
+    border-radius: 1.5rem; padding: 2rem;
+    transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.pata-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+.section-title { font-size: 3.5rem; margin-bottom: 1rem; }
+.section-subtitle { font-size: 1.25rem; max-width: 600px; margin: 0 auto 3rem auto; color: var(--text-light); }
+.grid { display: grid; gap: 2rem; }
+
+/* Header */
+.main-header {
+    background:rgba(248,245,89, 0.8); backdrop-filter: blur(12px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky; top: 0; z-index: 50; width: 100%;
+}
+.header-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo-icon {
+    width: 48px; height: 48px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center;
+}
+.logo-icon svg { width: 24px; height: 24px; color: white; }
+.logo-text h1 {
+    font-size: 1.8rem;
+    background: linear-gradient(to right, var(--pata-primary), var(--pata-secondary));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.logo-text p { font-size: 0.75rem; color: var(--text-light); margin-top: -5px; }
+.main-nav { display: flex; gap: 1rem; }
+.main-nav a {
+    padding: 8px 12px; font-weight: 500; color: var(--text-dark);
+    transition: color 0.3s; position: relative;
+}
+.main-nav a::after {
+    content: ''; position: absolute; bottom: 0; left: 50%;
+    transform: translateX(-50%); width: 0; height: 2px;
+    background: var(--pata-primary); transition: width 0.3s ease;
+}
+.main-nav a:hover::after { width: 100%; }
+
+/* Hero Section */
+.hero {
+    position: relative; height: 100vh; display: flex; align-items: center;
+    justify-content: center; text-align: center; color: white; overflow: hidden;
+}
+.hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover; background-position: center;
+    opacity: 0.6; z-index: 1;
+}
+.hero-overlay { position: absolute; inset: 0; background: var(--pata-primary); opacity: 0.2; z-index: 2; }
+.hero-content { position: relative; z-index: 3; padding: 20px; }
+.hero-badge {
+    display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px); padding: 8px 16px; border-radius: 9999px;
+    color: var(--pata-primary); font-weight: 500; margin-bottom: 1.5rem;
+}
+.hero h1 { font-size: 5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+.hero .highlight { color: var(--pata-highlight); display: block; }
+.hero p { font-size: 1.5rem; max-width: 600px; margin: 0 auto 2.5rem auto; opacity: 0.9; }
+.hero-buttons { display: flex; justify-content: center; gap: 1rem; }
+.hero-buttons .secondary-button {
+    background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Formulários */
+.form-group { margin-bottom: 1.5rem; }
+.form-group label {
+    display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-dark);
+}
+.form-input, .form-select, .form-textarea {
+    width: 100%; padding: 14px; border: 1px solid #ddd;
+    border-radius: 12px; font-size: 1rem; font-family: var(--font-secondary);
+    transition: all 0.3s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none; border-color: var(--pata-primary);
+    box-shadow: 0 0 0 3px rgba(35, 97, 155, 0.2);
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+/* Footer */
+.main-footer {
+    background-color: #fff; border-top: 1px solid #eee; padding: 4rem 0;
+}
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+.footer-col h4 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+.footer-col p, .footer-col li { margin-bottom: 1rem; color: var(--text-light); }
+.footer-col ul { list-style: none; }
+.footer-col a:hover { color: var(--pata-primary); }
+.social-links { display: flex; gap: 1rem; }
+.social-links a { color: var(--text-light); transition: color 0.3s; }
+.footer-bottom { border-top: 1px solid #eee; margin-top: 3rem; padding-top: 2rem; text-align: center; color: var(--text-light); }
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .main-nav { display: none; } /* Simplificação para mobile, um menu hamburguer seria ideal com JS */
+    .header-cta { display: none; }
+    .hero h1 { font-size: 3rem; }
+    .hero p { font-size: 1.1rem; }
+    .hero-buttons { flex-direction: column; }
+    .section-title { font-size: 2.5rem; }
+    .form-grid { grid-template-columns: 1fr; }
+}
+    </style>
+</head>
+<body>
+  
+     <header class="main-header">
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <img src="Imagens/logoPATA.png" height="300px" width="300px"> </img>
+                </div>
+            <nav class="main-nav">
+                <a href="./index.html">Início</a>
+                <a href="./services.html">Serviços</a>
+                <a href="./products.html">Produtos</a>
+                <a href="./booking.html">Agendamento</a>
+                <a href="./about.html">Sobre Nós</a>
+                <a href="./contact.html">Contato</a>
+            </nav>
+            <div class="header-cta"><a href="./register.html" class="pata-button">Login/Cadastro</a></div>
+        </div>
+    </header>
+        <section class="section text-center"  style="background: #61a8f1;">
+            <div class="container">
+                <h1 class="section-title" style= "color: #f8f559;">Sobre a PataAmiga</h1>
+                <p class="section-subtitle" style= "color: white">Não somos apenas um pet shop. Somos o lar fora de casa do seu melhor amigo.</p>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                 <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem;">
+                    <div>
+                        <h2 class="section-title" style="text-align: left;">Nossa História</h2>
+                        <p style="margin-top: 1.5rem; color: var(--text-light); line-height: 1.8;">A PataAmiga nasceu do sonho de criar um espaço onde cada pet fosse tratado com o amor e o respeito que merece. Fundada na Barra da Tijuca, nossa missão sempre foi clara: proporcionar felicidade e saúde para os animais e tranquilidade para suas famílias.</p>
+                        <p style="margin-top: 1rem; color: var(--text-light); line-height: 1.8;">Com uma equipe de especialistas apaixonados, crescemos e nos tornamos uma referência em cuidados pet, combinando expertise técnica com um carinho genuíno que faz toda a diferença.</p>
+                    </div>
+                    <div>
+                        <img src="./Imagens/DogPhoto.jpg" alt="Equipe feliz" style="width: 100%; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section text-center" style="background: #fff;">
+            <div class="container">
+                <h2 class="section-title">Nossos Valores</h2>
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 3rem;">
+                    <div class="pata-card">
+                        <span style="font-size: 3rem;">❤️</span>
+                        <h3 style="font-size: 1.8rem; margin: 1rem 0;">Amor</h3>
+                        <p>A base de tudo que fazemos. Cuidamos de cada pet como se fosse nosso.</p>
+                    </div>
+                    <div class="pata-card">
+                        <span style="font-size: 3rem;">🤝</span>
+                        <h3 style="font-size: 1.8rem; margin: 1rem 0;">Confiança</h3>
+                        <p>Transparência e honestidade para construir relações duradouras.</p>
+                    </div>
+                    <div class="pata-card">
+                        <span style="font-size: 3rem;">⭐</span>
+                        <h3 style="font-size: 1.8rem; margin: 1rem 0;">Excelência</h3>
+                        <p>Buscamos a mais alta qualidade em nossos serviços e produtos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+  <footer class="main-footer" style="background-color: #61a8f1;">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="grid-column: span 2;" style="color: white;">
+                    <a><div ><img src="./Imagens/LogoWhite.png" width="75%" height="75%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div><div class="logo-text"></div></a>
+                    <p style="margin-top: 1rem; color: white;">Mais que um petshop, somos uma família que cuida da sua família.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li ><a href="./services.html" style="color: white;">Serviços</a></li>
+                        <li><a href="./products.html" style="color: white;" >Produtos</a></li>
+                        <li><a href="./booking.html" style="color: white;">Agendamento</a></li>
+                        <li><a href="./about.html" style="color: white;">Sobre Nós</a></li>
+                        <li><a href="./contact.html" style="color: white;">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contatos</h4>
+                    <ul>
+                        <li><p style="color: white;">Rua dos Anjos, 517,<br>Barra da Tijuca, Rio de Janeiro</p></li></li>
+                        <li><p style="color: white;">(21) 99999-9999</p></li>
+                        <li><p style="color: white;">@opata_amiga</p></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom" style="color: white;">
+                <p>© 2025 PataAmiga. Feito com ❤️ para você e seu pet🐾</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
