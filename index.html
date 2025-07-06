@@ -698,9 +698,15 @@ function toggleMobileMenu() {
 
     </style>
 </head>
+<script>
+function toggleMobileMenu() {
+    const nav = document.querySelector('.main-nav');
+    nav.classList.toggle('active');
+}
+</script>
 <body>
 
-    <header class="main-header">
+    <header class="main-header" <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>>
         <div class="container header-content">
                 <div class="logo-icon">
                     <img src="Imagens/logoPATA.png" height="300px" width="300px"> </img>
